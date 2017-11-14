@@ -5,7 +5,11 @@
     @if(count($books)>0)
         @foreach ($books as $book)
             <div class="col-sm-6 well">
-                <h3><a href="/admin/books/{{$book->id}}">{{$book->books_name}}</a></h3>
+                <div class="col-sm-4">
+                <img style="width:100%" src="../storage/cover_images/{{$book->books_image}}">
+                </div>
+                <div class="col-sm-8">
+                <h4><a href="{{ url('/admin/books/'.$book->id) }}">{{$book->books_name}}</a></h4>
                 <h5>Год издания: {{$book->books_year}}</h5>
                 <h5>Автор: 
                     @foreach ($book->authors as $author)
@@ -20,6 +24,7 @@
                 <h5>Язык: {{$book->language->languages_name}}</h5>
                 <h5>Издательство: {{$book->phouse->phouses_name}}</h5>
                 <h5>Количество страниц: {{$book->books_pages}}</h5>
+                </div>
             </div>
         @endforeach
     @else

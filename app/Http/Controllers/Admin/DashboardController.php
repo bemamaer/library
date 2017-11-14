@@ -99,7 +99,6 @@ class DashboardController extends Controller
         $book->books_descrip=$request->descrip;
         $book->books_image = $fileNameToStore;
         $book->save();
-        $authors = author::orderBy('author_name', 'asc')->get();
         return redirect('admin/create2/'.$book->id.'');
     }
     public function book_author($id)

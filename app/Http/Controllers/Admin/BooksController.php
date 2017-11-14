@@ -61,7 +61,8 @@ class BooksController extends Controller
      */
     public function show($id)
     {
-        //
+        $book=book::find($id);
+        return view('books/show')->with('book',$book);
     }
 
     /**
@@ -72,7 +73,14 @@ class BooksController extends Controller
      */
     public function edit($id)
     {
-        //
+        $book=book::find($id);
+        $headings = heading::orderBy('heading_name', 'asc')->get();
+        $languages=language::orderBy('languages_name', 'asc')->get();
+        $phouses=phouse::orderBy('phouses_name', 'asc')->get();
+        return view('books/edit')->with('book',$book)
+                                ->with('headings',$headings)
+                                ->with('lang',$languages)
+                                ->with('phouses',$phouses);
     }
 
     /**
@@ -84,7 +92,31 @@ class BooksController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        if($request->hasFile('cover_image')){
+            // Get filename with the extension
+            $filenameWithExt = $request->file('cover_image')->getClientOriginalName();
+            // Get just filename
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            // Get just ext
+            $extension = $request->file('cover_image')->getClientOriginalExtension();
+            // Filename to store
+            $fileNameToStore= $filename.'_'.time().'.'.$extension;
+            // Upload Image
+            $path = $request->file('cover_image')->storeAs('public/cover_images', $fileNameToStore);
+        } 
+        $book = book::find($id);
+        $book->books_name = $request->name;
+        $book->books_heading=$request->heading;
+        $book->books_lang=$request->lang;
+        $book->books_pages=$request->pages;
+        $book->books_phouse=$request->phouse;
+        $book->books_year=$request->year;
+        $book->books_descrip=$request->descrip;
+        if($request->hasFile('cover_image')){
+            $book->books_image = $fileNameToStore;
+        }
+        $book->save();
+        return redirect('admin/books/'.$book->id.'');
     }
 
     /**
@@ -95,6 +127,9 @@ class BooksController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $book = book::find($id);
+        $authors=author_book::where('book_id',$id)->delete();  
+        $book->delete();
+        return redirect('admin/');
     }
 }

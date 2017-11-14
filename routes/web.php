@@ -28,6 +28,7 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>['auth']],fun
     Route::post('/create_book','DashboardController@store_book');
     Route::get('/create2/{id}','DashboardController@book_author');
     Route::post('/create2','DashboardController@store_authors');
+    Route::post('/books/{id}','BooksController@update');
     Route::resource('books','BooksController');
 });
 

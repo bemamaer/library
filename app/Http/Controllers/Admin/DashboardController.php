@@ -75,6 +75,20 @@ class DashboardController extends Controller
     }
     public function store_book(Request $request)
     {
+        if($request->hasFile('cover_image')){
+            // Get filename with the extension
+            $filenameWithExt = $request->file('cover_image')->getClientOriginalName();
+            // Get just filename
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            // Get just ext
+            $extension = $request->file('cover_image')->getClientOriginalExtension();
+            // Filename to store
+            $fileNameToStore= $filename.'_'.time().'.'.$extension;
+            // Upload Image
+            $path = $request->file('cover_image')->storeAs('public/cover_images', $fileNameToStore);
+        } else {
+            $fileNameToStore = 'noimage.jpg';
+        }
         $book = new book;
         $book->books_name = $request->name;
         $book->books_heading=$request->heading;
@@ -83,6 +97,7 @@ class DashboardController extends Controller
         $book->books_phouse=$request->phouse;
         $book->books_year=$request->year;
         $book->books_descrip=$request->descrip;
+        $book->books_image = $fileNameToStore;
         $book->save();
         $authors = author::orderBy('author_name', 'asc')->get();
         return redirect('admin/create2/'.$book->id.'');

@@ -29,7 +29,7 @@ class BooksController extends Controller
                     })
                     ->get();                 
         $books->load('authors', 'heading','language');
-        return view('admin.books.index')->with('books',$books);
+        return view('books/index')->with('books',$books);
     }
 
     /**

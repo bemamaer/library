@@ -115,7 +115,7 @@
     <h4 class="panel-title">Добавить книгу</h4>
 </div>
 <div class="panel-body">
-    <form class="form-horizontal" method="POST" action="{{ url('admin/create_book') }}"> 
+    <form class="form-horizontal" method="POST" action="{{ url('admin/create_book') }}" enctype="multipart/form-data"> 
     {{ csrf_field() }}  
     <div class="form-group">
         <label class="control-label col-sm-4" for="name">Название:</label>
@@ -171,12 +171,12 @@
             <input type="text" class="form-control" name="descrip" id="descrip">
         </div>
     </div>
-    <!-- <div class="form-group"> 
+    <div class="form-group"> 
         <label class="control-label col-sm-4" for="fileToUpload">Загрузить обложку:</label>
         <div class="col-sm-7">
-            <input type="file" name="fileToUpload" id="fileToUpload">
+            <input type="file" name="cover_image" id="cover_image">
         </div>
-    </div>-->
+    </div>
     <div class="form-group">
         <div class="col-sm-4"></div>
         <div class="col-sm-7">

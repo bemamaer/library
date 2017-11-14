@@ -9,7 +9,11 @@
                 <h5>Год издания: {{$book->books_year}}</h5>
                 <h5>Автор: 
                     @foreach ($book->authors as $author)
-                        {{$author->author_name}} {{$author->author_surname}} {{$author->author_middlename}} ,
+                        @if($loop->first)
+                            {{$author->author_name}} {{$author->author_surname}} {{$author->author_middlename}}
+                        @else
+                            , {{$author->author_name}} {{$author->author_surname}} {{$author->author_middlename}}
+                        @endif
                     @endforeach
                 </h5>
                 <h5>Направление: {{$book->heading->heading_name}}</h5>

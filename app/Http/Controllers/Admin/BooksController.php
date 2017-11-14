@@ -19,12 +19,15 @@ class BooksController extends Controller
      */
     public function index(Request $request)
     {
-        $books=book::where('books_name','like','%'.$request->search.'%')
-                    ->orwhere('authors', function ($query)
+        $search=$request->search;
+        $books=book::where('books_name','like','%'.$search.'%')
+                    ->orwhereHas('authors',function($query) use ($search)
                     {
-                        $query->where('author_name','like','%'.$request->search.'%');
+                        $query->where('author_name',$search)
+                              ->orwhere('author_surname',$search)
+                              ->orwhere('author_middlename',$search);
                     })
-                    ->get();
+                    ->get();                 
         $books->load('authors', 'heading','language');
         return view('admin.books.index')->with('books',$books);
     }

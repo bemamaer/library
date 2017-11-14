@@ -14,7 +14,7 @@ class CreateHeadingsTable extends Migration
     public function up()
     {
         Schema::create('headings', function (Blueprint $table) {
-            $table->increments('heading_id');
+            $table->increments('id');
             $table->string('heading_name');
             $table->timestamps();
         });

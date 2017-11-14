@@ -14,7 +14,7 @@ class CreatePhousesTable extends Migration
     public function up()
     {
         Schema::create('phouses', function (Blueprint $table) {
-            $table->increments('phouses_id');
+            $table->increments('id');
             $table->string('phouses_name');
             $table->string('phouses_adress');
             $table->string('phouses_tel');

@@ -25,4 +25,9 @@ class book extends Model
     {
       return $this->belongsTo('App\phouse','books_phouse');
     }
+
+    public function book_items()
+    {
+      return $this->hasMany('App\book_item');
+    }
 }

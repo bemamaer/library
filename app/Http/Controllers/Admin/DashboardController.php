@@ -10,6 +10,7 @@ use App\phouse;
 use App\book;
 use App\author;
 use App\author_book;
+use App\book_item;
 class DashboardController extends Controller
 {
     //Dashboard
@@ -99,6 +100,13 @@ class DashboardController extends Controller
         $book->books_descrip=$request->descrip;
         $book->books_image = $fileNameToStore;
         $book->save();
+        for($i=0;$i<$request->exemplar;$i++)
+        {
+            $book_item=new book_item;
+            $book_item->book_id=$id;
+            $book_item->serial_number=uniqid();
+            $book_item->save();
+        }
         return redirect('admin/create2/'.$book->id.'');
     }
     public function book_author($id)
@@ -107,4 +115,5 @@ class DashboardController extends Controller
         $authors = author::orderBy('author_name', 'asc')->get();
         return view('admin/create2',['book'=>$book,'authors'=>$authors]);
     }
+    
 }

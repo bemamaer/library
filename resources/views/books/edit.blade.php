@@ -117,6 +117,7 @@
 <div class="panel-body">
     <form class="form-horizontal" method="POST" action="{{ url('/admin/books/'.$book->id) }}" enctype="multipart/form-data"> 
     {{ csrf_field() }}  
+    {{method_field('PUT')}}
     <div class="form-group">
         <label class="control-label col-sm-4" for="name">Название:</label>
         <div class="col-sm-7">

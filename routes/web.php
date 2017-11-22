@@ -23,12 +23,12 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>['auth']],fun
     Route::post('/create_language','DashboardController@store_lang'); 
     Route::post('/create_phouse','DashboardController@store_phouse'); 
     Route::post('/create_author','DashboardController@store_author'); 
-    Route::get('/create2','DashboardController@authors');
-    Route::post('/create_authors','DashboardController@store_authors');
     Route::post('/create_book','DashboardController@store_book');
     Route::get('/create2/{id}','DashboardController@book_author');
     Route::post('/create2','DashboardController@store_authors');
-    Route::post('/books/{id}','BooksController@update');
+    Route::get('/book_items/{id}','BItemsController@index');
+    Route::post('/book_items','BItemsController@store');
+    Route::delete('/book_items/{id}','BItemsController@destroy');
     Route::resource('books','BooksController');
 });
 

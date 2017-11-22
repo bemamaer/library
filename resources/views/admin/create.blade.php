@@ -178,6 +178,12 @@
         </div>
     </div>
     <div class="form-group">
+        <label class="control-label col-sm-4" for="exemplar">Количество экземпляров:</label>
+        <div class="col-sm-7">
+            <input type="text" class="form-control" name="exemplar" id="exemplar">
+        </div>
+    </div>
+    <div class="form-group">
         <div class="col-sm-4"></div>
         <div class="col-sm-7">
             <button type="submit" class="btn btn-default">Далее</button>

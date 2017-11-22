@@ -21,6 +21,7 @@
         <h4>Язык: {{$book->language->languages_name}}</h4>
         <h4>Издательство: {{$book->phouse->phouses_name}}</h4>
         <h4>Количество страниц: {{$book->books_pages}}</h4>
+        <h4>Количество экземпляров: <a href="{{ url('/admin/book_items/'.$book->id) }}">{{count($book->book_items)}}</a></h4>
         <h4>Описание:<br><br> {{$book->books_descrip}}</h4>
     </div>
 </div>

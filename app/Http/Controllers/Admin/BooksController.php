@@ -10,6 +10,7 @@ use App\phouse;
 use App\book;
 use App\author;
 use App\author_book;
+use App\book_item;
 class BooksController extends Controller
 {
     /**
@@ -129,7 +130,9 @@ class BooksController extends Controller
     {
         $book = book::find($id);
         $authors=author_book::where('book_id',$id)->delete();  
+        $items=book_item::where('book_id',$id)->delete();
         $book->delete();
         return redirect('admin/');
     }
+    
 }
